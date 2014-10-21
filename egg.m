@@ -24,24 +24,51 @@ figure('Color',[1 1 1]);
 [x y z] = makeEgg(2,2,0.05); 
 
 %pattes
-h = surf(x,y,z,'FaceLighting','gouraud', 'LineStyle','none','FaceColor','g'); 
+h = surf(x,y,z,'FaceLighting','gouraud', ...
+    'LineStyle','none','FaceColor','g'); 
 rotate(h,[0 1 0],0,[0 0 0]); hold on; 
-h = surf(0.9*x-2.5,0.9*y+2,0.9*z-0.5,'FaceLighting','gouraud', 'LineStyle','none','FaceColor','b'); 
+h = surf(0.9*x-2.5,0.9*y+2,0.9*z-0.5, 'FaceLighting','gouraud', ...
+    'LineStyle','none','FaceColor','b'); 
 rotate(h,[0 1 0],20,[0 0 0]); hold on; 
-h = surf(0.9*x+4,0.9*y,0.9*z,'FaceLighting','gouraud', 'LineStyle','none','FaceColor','r'); 
+h = surf(0.9*x+4,0.9*y,0.9*z,'FaceLighting','gouraud', ...
+    'LineStyle','none','FaceColor','r'); 
 rotate(h,[0 1 0],-15,[0 0 0]); hold on; 
-h = surf(0.8*x+2,0.8*y+2.5,0.8*z+1,'FaceLighting','gouraud', 'LineStyle','none','FaceColor','k'); 
+h = surf(0.8*x+2,0.8*y+2.5,0.8*z+1,'FaceLighting','gouraud', ...
+    'LineStyle','none','FaceColor','k'); 
 rotate(h,[0 1 0],10,[0 0 0]); hold on; 
 
 %corps
-h = surf(2*x-2,2*y+1,2*z+1,'FaceLighting','gouraud', 'LineStyle','none','FaceColor','c'); 
+h = surf(2*x-2,2*y+1,2*z+1,'FaceLighting','gouraud', ...
+    'LineStyle','none','FaceColor','c'); 
 rotate(h,[0 1 0],80,[0 0 0]); light('Position',[ 0.0 -0.75 0.5]);
 
+%cou
+h = surf(0.9*x+0.5,0.9*y+1,0.9*z-4.5,'FaceLighting','gouraud', ...
+    'LineStyle','none','FaceColor',[60/255 30/255 0]); 
+rotate(h,[0 1 0],140,[0 0 0]); light('Position',[ 0.0 -0.75 0.5]);
 %tete
-h = surf(1.2*x-1,1.2*y+1,1.2*z-5,'FaceLighting','gouraud', 'LineStyle','none','FaceColor',[153/255 56/255 0]); 
-rotate(h,[0 1 0],120,[0 0 0]); light('Position',[ 0.0 -0.75 0.5]);
+h = surf(0.9*x-3,0.9*y+1,0.9*z-5,'FaceLighting','gouraud', ...
+    'LineStyle','none','FaceColor',[60/255 30/255 0]); 
+rotate(h,[0 1 0],100,[0 0 0]); light('Position',[ 0.0 -0.75 0.5]);
+
+%visage
+h = surf(0.3*x-3.3,0.9*y+1,0.2*z-6,'FaceLighting','gouraud', ...
+    'LineStyle','none','FaceColor',[204/255 0/255 0]); 
+rotate(h,[0 1 0],100,[0 0 0]); light('Position',[ 0.0 -0.75 0.5]);
+
+%cheveux
+for i =-5:5
+    h = surf(0.09*x-1.3,0.07*y+1+i/10,0.6*z-4.2,'FaceLighting','none', ...
+    'LineStyle','none','FaceColor',[10/255 0 0]); 
+    rotate(h,[0 1 0],130,[0 0 0]); light('Position',[ 0.0 -0.75 0.5]);
+    h = surf(0.09*x-3.85,0.07*y+1+i/10,0.6*z-4.8,'FaceLighting','none', ...
+    'LineStyle','none','FaceColor',[10/255 0 0]); 
+    rotate(h,[0 1 0],100,[0 0 0]); light('Position',[ 0.0 -0.75 0.5]);
+end
+    
 %queue
-h = surf(0.3*x-5,0.2*y+1,0.9*z+2.5,'FaceLighting','gouraud', 'LineStyle','none','FaceColor',[100/255 50/255 0]); 
+h = surf(0.3*x-5,0.2*y+1,0.9*z+2.5,'FaceLighting','gouraud', ...
+    'LineStyle','none','FaceColor',[100/255 50/255 0]); 
 rotate(h,[0 1 0],120,[0 0 0]); light('Position',[ 0.0 -0.75 0.5]);
 
 

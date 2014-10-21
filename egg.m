@@ -27,6 +27,17 @@ end
     
 end
 
+% Nous savons qu'une B-spline ne peut etre
+% non nulle que sur un intervalle [ T_i,T_i+p+1 [
+% Dans notre cas, p=2 . Si le dernier noeud est triple , on aura donc
+% Le B-spline qui passe instantanement de 1 (il est maximal juste avant
+% ce triple noeud) a 0 (puisque non nul sur [T_i, T_1+3[.
+% Cela resulte donc en une discontinuite que Matlab peine a representer,
+% il dessine donc une large fissure. C'est pourquoi on ne met pas de
+% noeud triple.
+% Notons que nous n'avons pas ce probleme pour les premiers noeuds
+% puisque l'intervalle est ferme au debut.
+
 
 
 function [x y z] = makeEgg(top, bottom, dt)
@@ -80,18 +91,6 @@ y = Bs' * (W .* Y) * Bt ./ w;
 z = Bs' * (W .* Z) * Bt ./ w;
 
 end
-
-
-% Nous savons qu'une B-spline ne peut etre
-% non nulle que sur un intervalle [ T_i,T_i+p+1 [
-% Dans notre cas, p=2 . Si le dernier noeud est triple , on aura donc
-% Le B-spline qui passe instantanement de 1 (il est maximal juste avant
-% ce triple noeud) a 0 (puisque non nul sur [T_i, T_1+3[.
-% Cela resulte donc en une discontinuite que Matlab peine a representer,
-% il dessine donc une large fissure. C'est pourquoi on ne met pas de
-% noeud triple.
-% Notons que nous n'avons pas ce probleme pour les premiers noeuds
-% puisque l'intervalle est ferme au debut.
 
 
 
@@ -259,6 +258,12 @@ axis('on'); axis('equal');view([0 0]);
 
 end
 
+
+
+
+
+
+
 function makeThing3()
 % Fonction qui dessine Pikatchu avec le dinosaure
 
@@ -319,7 +324,8 @@ rotate(h,[0 1 0],120,[0 0 0]); light('Position',[ 0.0 -0.75 0.5]);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Corps de Pikatchu
-h = surf(5*xP + 10,5*yP + 10,5*zP + 4,'FaceLighting','gouraud', 'LineStyle','none', ...
+h = surf(5*xP + 10,5*yP + 10,5*zP + 4, ...
+    'FaceLighting','gouraud', 'LineStyle','none', ...
     'FaceColor',[1 1 0]); hold on;
 
 % Head
@@ -400,6 +406,7 @@ figure;
 surf(x,y,z); axis('off'); axis('equal');
 
 end
+
 
 
 

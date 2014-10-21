@@ -14,9 +14,26 @@ function egg(top,bottom,dt,mode)
 if ~mode 
     modeEgg(top, bottom, dt)
 else
-    makeThing(top, bottom, dt)
+    makeThing()
 end
     
+end
+
+function makeThing()
+figure('Color',[1 1 1]); 
+[x y z] = makeEgg(1,1,0.05); 
+
+h = surf(x,y,z,'FaceLighting','gouraud', 'LineStyle','none','FaceColor',[0.1 0.9 0.1]); 
+rotate(h,[0 1 0],0,[0 0 0]); hold on; 
+
+h = surf(1.5*x+4,1.5*y+3,1.5*z+0.5,'FaceLighting','gouraud', 'LineStyle','none','FaceColor',[0.1 0.1 0.9]); 
+
+h = surf(2*x+3,2*y+5,2*z,'FaceLighting','gouraud', 'LineStyle','none','FaceColor',[0.9 0.1 0.1]); 
+rotate(h,[0 1 0],-60,[0 0 0]); light('Position',[ 0.0 -0.75 0.5]);
+
+light('Position',[-0.5 -0.75 0.5]); 
+axis('off'); axis('equal');view([0 0]);
+
 end
 
 function modeEgg(top, bottom, dt)

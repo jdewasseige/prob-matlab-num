@@ -1,9 +1,9 @@
 function egg(top,bottom,dt,mode)
-%Fonction qui retourne trois matrices de même dimensions
-%afin de pouvoir représenter graphiquement (avec la fonction
-%'surf') des oeufs et formes qui en dérivent.
+% Fonction qui retourne trois matrices de memes dimensions
+% afin de pouvoir représenter graphiquement (avec la fonction
+% 'surf') des oeufs et formes qui en dérivent.
 %
-%input  - top, bottom : allongements relatifs de la partie
+% input - top, bottom : allongements relatifs de la partie
 %                       supérieure et inférieure de l'oeuf
 %       - dt          : incrément utilisé pour parcourir 
 %                       l'espace paramétrique de la
@@ -74,6 +74,18 @@ y = Bs' * (W .* Y) * Bt ./ w;
 z = Bs' * (W .* Z) * Bt ./ w;
 
 end
+
+
+% Nous savons qu'une B-spline ne peut être
+% non nulle que sur un intervalle [ T_i,T_i+p+1 [
+% Dans notre cas, p=2 . Si le dernier noeud est triple , on aura donc
+% Le B-spline qui passe instantanément de 1 (il est maximal juste avant
+% ce triple noeud) a 0 (puisque non nul sur [T_i, T_1+3[.
+% Cela resulte donc en une discontinuite que Matlab peine a representer,
+% il dessine donc une large fissure. C'est pourquoi on ne met pas de
+% noeud triple.
+% Notons que nous n'avons pas ce probleme pour les premiers noeuds
+% puisque l'intervalle est ferme au debut.
 
 
 function u = b(t,T,j,p)

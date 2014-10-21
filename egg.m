@@ -12,9 +12,10 @@ function egg(top,bottom,dt,mode)
 %                       1 pour une figure originale
 
 if ~mode 
-    modeEgg(top, bottom, dt)
+    modeEgg(top, bottom, dt);
 else
-    makeThing()
+    makeThing();
+    makeThing2();
 end
     
 end
@@ -76,6 +77,107 @@ light('Position',[-0.5 -0.75 0.5]);
 axis('on'); axis('equal');view([0 0]);
 
 end
+
+
+
+function makeThing2()
+figure('Color',[1 1 1]); 
+[x y z] = makeEgg(2,1,0.05);    % Oeuf
+[xC yC zC] = makeEgg(1,1,0.05); % Cercle
+[xS yS zS] = makeEgg(3,3,0.05); % Suppositoire
+
+% Corps de Pikatchu
+h = surf(5*x + 10,5*y + 10,5*z + 4,'FaceLighting','gouraud', 'LineStyle','none', ...
+    'FaceColor',[1 1 0]); hold on;
+
+% Head
+h = surf(5*xC + 10,5*yC + 10,5*zC + 12, ...
+    'FaceLighting','gouraud', 'LineStyle','none', ...
+    'FaceColor',[1 1 0]);
+
+% Pied gauche
+h = surf(1.5*x+6,1.5*y+10,1.5*z+0.5,'FaceLighting','gouraud',...
+    'LineStyle','none','FaceColor',[1 1 0]);
+rotate(h,[0 1 0],-50, [6 10 0.5]);
+
+% Pied droit
+h = surf(1.5*x+10,1.5*y+6,1.5*z+0.5,'FaceLighting','gouraud',...
+    'LineStyle','none','FaceColor',[1 1 0]);
+rotate(h,[1 0 0],50, [10 6 0.5]);
+
+% Oreille gauche
+h = surf(1.5*xS+8.5,1.5*yS+12.5,1.5*zS+16,'FaceLighting','gouraud',...
+    'LineStyle','none','FaceColor',[1 1 0]);
+rotate(h,[1/2 1 0],-80, [8.5 12.5 16]);
+
+% Oreille droite
+h = surf(1.5*xS+12.5,1.5*yS+8.5,1.5*zS+16,'FaceLighting','gouraud',...
+    'LineStyle','none','FaceColor',[1 1 0]);
+rotate(h,[1 1/2 0],20, [12.5 8.5 16]);
+
+% Oeil gauche
+h = surf(1*xC + 6 , 1*yC + 8.5 , 1*zC + 13.8, ...
+    'FaceLighting','gouraud',...
+    'LineStyle','none','FaceColor',[0 0 0]);
+
+% Oeil droit
+h = surf(1*xC + 8.5 , 1*yC + 6 , 1*zC + 13.8, ...
+    'FaceLighting','gouraud',...
+    'LineStyle','none','FaceColor',[0 0 0]);
+
+% Joue gauche
+h = surf(1.3*xC + 6 , 1.3*yC + 9.5 , 1.3*zC + 12, ...
+    'FaceLighting','gouraud',...
+    'LineStyle','none','FaceColor',[0.9 0.1 0.1]);
+
+% Joue droite
+h = surf(1.3*xC + 9.5 , 1.3*yC + 6 , 1.3*zC + 12, ...
+    'FaceLighting','gouraud',...
+    'LineStyle','none','FaceColor',[0.9 0.1 0.1]);
+
+% Langue
+h = surf(0.75*x + 7 , 0.75*y + 7, 1*z + 12 , ...
+    'FaceLighting','gouraud',...
+    'LineStyle','none','FaceColor',[1 182/255 193/255]);
+rotate(h,[1 -1 0],120, [7 7 12]);
+
+% Bras gauche
+h = surf(1.5*x+5,1.5*y+11,1.5*z+7.5,'FaceLighting','gouraud',...
+    'LineStyle','none','FaceColor',[1 1 0]);
+rotate(h,[0 1 0],-50, [5 11 7.5]);
+
+% Bras droit
+h = surf(1.5*x+11,1.5*y+5,1.5*z+7.5,'FaceLighting','gouraud',...
+    'LineStyle','none','FaceColor',[1 1 0]);
+rotate(h,[1 0 0],50, [11 5 7.5]);
+
+
+
+
+
+
+% Jaune
+h = surf(x,y,z,'FaceLighting','gouraud', 'LineStyle',...
+    'none','FaceColor',[1 1 0]); 
+
+
+% Noir
+h = surf(1.5*x+4,1.5*y+3,1.5*z+0.5,'FaceLighting','gouraud',...
+    'LineStyle','none','FaceColor',[0 0 0]); 
+
+% Rouge
+h = surf(2*x+3,2*y+5,2*z,'FaceLighting','gouraud', 'LineStyle','none',...
+    'FaceColor',[0.9 0.1 0.1]); 
+%rotate(h,[0 1 0],-60);
+light('Position',[ 0.0 -0.75 0.5]);
+
+light('Position',[-0.5 -0.75 0.5]); 
+axis('on'); axis('equal');view([0 0]);
+
+end
+
+
+
 
 function modeEgg(top, bottom, dt)
 

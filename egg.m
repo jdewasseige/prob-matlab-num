@@ -21,18 +21,32 @@ end
 
 function makeThing()
 figure('Color',[1 1 1]); 
-[x y z] = makeEgg(1,1,0.05); 
+[x y z] = makeEgg(2,2,0.05); 
 
-h = surf(x,y,z,'FaceLighting','gouraud', 'LineStyle','none','FaceColor',[0.1 0.9 0.1]); 
+%pattes
+h = surf(x,y,z,'FaceLighting','gouraud', 'LineStyle','none','FaceColor','g'); 
 rotate(h,[0 1 0],0,[0 0 0]); hold on; 
+h = surf(0.9*x-2.5,0.9*y+2,0.9*z-0.5,'FaceLighting','gouraud', 'LineStyle','none','FaceColor','b'); 
+rotate(h,[0 1 0],20,[0 0 0]); hold on; 
+h = surf(0.9*x+4,0.9*y,0.9*z,'FaceLighting','gouraud', 'LineStyle','none','FaceColor','r'); 
+rotate(h,[0 1 0],-15,[0 0 0]); hold on; 
+h = surf(0.8*x+2,0.8*y+2.5,0.8*z+1,'FaceLighting','gouraud', 'LineStyle','none','FaceColor','k'); 
+rotate(h,[0 1 0],10,[0 0 0]); hold on; 
 
-h = surf(1.5*x+4,1.5*y+3,1.5*z+0.5,'FaceLighting','gouraud', 'LineStyle','none','FaceColor',[0.1 0.1 0.9]); 
+%corps
+h = surf(2*x-2,2*y+1,2*z+1,'FaceLighting','gouraud', 'LineStyle','none','FaceColor','c'); 
+rotate(h,[0 1 0],80,[0 0 0]); light('Position',[ 0.0 -0.75 0.5]);
 
-h = surf(2*x+3,2*y+5,2*z,'FaceLighting','gouraud', 'LineStyle','none','FaceColor',[0.9 0.1 0.1]); 
-rotate(h,[0 1 0],-60,[0 0 0]); light('Position',[ 0.0 -0.75 0.5]);
+%tete
+h = surf(1.2*x-1,1.2*y+1,1.2*z-5,'FaceLighting','gouraud', 'LineStyle','none','FaceColor',[153/255 56/255 0]); 
+rotate(h,[0 1 0],120,[0 0 0]); light('Position',[ 0.0 -0.75 0.5]);
+%queue
+h = surf(0.3*x-5,0.2*y+1,0.9*z+2.5,'FaceLighting','gouraud', 'LineStyle','none','FaceColor',[100/255 50/255 0]); 
+rotate(h,[0 1 0],120,[0 0 0]); light('Position',[ 0.0 -0.75 0.5]);
+
 
 light('Position',[-0.5 -0.75 0.5]); 
-axis('off'); axis('equal');view([0 0]);
+axis('on'); axis('equal');view([0 0]);
 
 end
 

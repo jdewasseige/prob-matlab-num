@@ -2,7 +2,7 @@
 % Probleme MATLAB 2 : Des oeufs de dinosaures...
 % Etudiants : Une collaboration de :
 %                       - Antoine Legat 4776-1300
-%                       - John de Wasseige
+%                       - John de Wasseige 5224-1300
 % Tuteur : Victor Colognesi
 
 function egg(top,bottom,dt,mode)
@@ -14,7 +14,7 @@ function egg(top,bottom,dt,mode)
 %       - dt          : increment utilise pour parcourir 
 %                       l'espace parametrique de la
 %                       representation graphique
-%       - mode        : (optional) 0 pour l'oeuf,
+%       - mode        : 0 pour l'oeuf,
 %                       1 pour des figures originales...
 
 if ~mode 
@@ -26,6 +26,7 @@ else
 end
     
 end
+
 
 % Nous savons qu'une B-spline ne peut etre
 % non nulle que sur un intervalle [ T_i,T_i+p+1 [
@@ -39,11 +40,10 @@ end
 % puisque l'intervalle est ferme au debut.
 
 
-
 function [x y z] = makeEgg(top, bottom, dt)
 % Fonction qui retourne trois matrices de memes dimensions
-% afin de pouvoir représenter graphiquement (avec la fonction
-% 'surf') des oeufs et formes qui en dérivent.
+% afin de pouvoir representer graphiquement (avec la fonction
+% 'surf') des oeufs et formes qui en derivent.
 
 T = [0 0 0 1 1 2 2 3] ;
 S = [0 0 0 1 1 2 2 3 3 4 4 5] ;
@@ -94,18 +94,13 @@ end
 
 
 
-
-
-
-
-
 function makeThing()
 % Fonction qui dessine un dinosaure a l'aide des NURBS
 
 figure('Color',[1 1 1]); 
 [x y z] = makeEgg(2,2,0.05); 
 
-%pattes
+% pattes
 h = surf(x,y,z,'FaceLighting','gouraud', ...
     'LineStyle','none','FaceColor','g'); 
 rotate(h,[0 1 0],0,[0 0 0]); hold on; 
@@ -119,26 +114,27 @@ h = surf(0.8*x+2,0.8*y+2.5,0.8*z+1,'FaceLighting','gouraud', ...
     'LineStyle','none','FaceColor','k'); 
 rotate(h,[0 1 0],10,[0 0 0]); hold on; 
 
-%corps
+% corps
 h = surf(2*x-2,2*y+1,2*z+1,'FaceLighting','gouraud', ...
     'LineStyle','none','FaceColor','c'); 
 rotate(h,[0 1 0],80,[0 0 0]); light('Position',[ 0.0 -0.75 0.5]);
 
-%cou
+% cou
 h = surf(0.9*x+0.5,0.9*y+1,0.9*z-4.5,'FaceLighting','gouraud', ...
     'LineStyle','none','FaceColor',[60/255 30/255 0]); 
 rotate(h,[0 1 0],140,[0 0 0]); light('Position',[ 0.0 -0.75 0.5]);
-%tete
+
+% tete
 h = surf(0.9*x-3,0.9*y+1,0.9*z-5,'FaceLighting','gouraud', ...
     'LineStyle','none','FaceColor',[60/255 30/255 0]); 
 rotate(h,[0 1 0],100,[0 0 0]); light('Position',[ 0.0 -0.75 0.5]);
 
-%visage
+% visage
 h = surf(0.3*x-3.3,0.9*y+1,0.2*z-6,'FaceLighting','gouraud', ...
     'LineStyle','none','FaceColor',[204/255 0/255 0]); 
 rotate(h,[0 1 0],100,[0 0 0]); light('Position',[ 0.0 -0.75 0.5]);
 
-%cheveux
+% cheveux
 for i =-5:5
     h = surf(0.09*x-1.3,0.07*y+1+i/10,0.6*z-4.2,'FaceLighting','none', ...
     'LineStyle','none','FaceColor',[10/255 0 0]); 
@@ -148,7 +144,7 @@ for i =-5:5
     rotate(h,[0 1 0],100,[0 0 0]); light('Position',[ 0.0 -0.75 0.5]);
 end
     
-%queue
+% queue
 h = surf(0.3*x-5,0.2*y+1,0.9*z+2.5,'FaceLighting','gouraud', ...
     'LineStyle','none','FaceColor',[100/255 50/255 0]); 
 rotate(h,[0 1 0],120,[0 0 0]); light('Position',[ 0.0 -0.75 0.5]);
@@ -158,8 +154,6 @@ light('Position',[-0.5 -0.75 0.5]);
 axis('on'); axis('equal');view([0 0]);
 
 end
-
-
 
 
 function makeThing2()
@@ -241,7 +235,6 @@ rotate(h,[1 0 0],50, [11 5 7.5]);
 h = surf(x,y,z,'FaceLighting','gouraud', 'LineStyle',...
     'none','FaceColor',[1 1 0]); 
 
-
 % Noir
 h = surf(1.5*x+4,1.5*y+3,1.5*z+0.5,'FaceLighting','gouraud',...
     'LineStyle','none','FaceColor',[0 0 0]); 
@@ -253,15 +246,11 @@ h = surf(2*x+3,2*y+5,2*z, ...
 %rotate(h,[0 1 0],-60);
 light('Position',[ 0.0 -0.75 0.5]);
 
+
 light('Position',[-0.5 -0.75 0.5]); 
 axis('on'); axis('equal');view([0 0]);
 
 end
-
-
-
-
-
 
 
 function makeThing3()
@@ -269,12 +258,12 @@ function makeThing3()
 
 figure('Color',[1 1 1]); 
 [x y z] = makeEgg(2,2,0.05); 
-[xP yP zP] = makeEgg(2,1,0.05);    % Oeuf
+[xP yP zP] = makeEgg(2,1,0.05); % Oeuf
 [xC yC zC] = makeEgg(1,1,0.05); % Cercle
 [xS yS zS] = makeEgg(3,3,0.05); % Suppositoire
 
 
-%pattes
+% pattes
 h = surf(x,y,z,'FaceLighting','gouraud', ...
     'LineStyle','none','FaceColor','g'); 
 rotate(h,[0 1 0],0,[0 0 0]); hold on; 
@@ -288,26 +277,27 @@ h = surf(0.8*x+2,0.8*y+2.5,0.8*z+1,'FaceLighting','gouraud', ...
     'LineStyle','none','FaceColor','k'); 
 rotate(h,[0 1 0],10,[0 0 0]); hold on; 
 
-%corps
+% corps
 h = surf(2*x-2,2*y+1,2*z+1,'FaceLighting','gouraud', ...
     'LineStyle','none','FaceColor','c'); 
 rotate(h,[0 1 0],80,[0 0 0]); light('Position',[ 0.0 -0.75 0.5]);
 
-%cou
+% cou
 h = surf(0.9*x+0.5,0.9*y+1,0.9*z-4.5,'FaceLighting','gouraud', ...
     'LineStyle','none','FaceColor',[60/255 30/255 0]); 
 rotate(h,[0 1 0],140,[0 0 0]); light('Position',[ 0.0 -0.75 0.5]);
-%tete
+
+% tete
 h = surf(0.9*x-3,0.9*y+1,0.9*z-5,'FaceLighting','gouraud', ...
     'LineStyle','none','FaceColor',[60/255 30/255 0]); 
 rotate(h,[0 1 0],100,[0 0 0]); light('Position',[ 0.0 -0.75 0.5]);
 
-%visage
+% visage
 h = surf(0.3*x-3.3,0.9*y+1,0.2*z-6,'FaceLighting','gouraud', ...
     'LineStyle','none','FaceColor',[204/255 0/255 0]); 
 rotate(h,[0 1 0],100,[0 0 0]); light('Position',[ 0.0 -0.75 0.5]);
 
-%cheveux
+% cheveux
 for i =-5:5
     h = surf(0.09*x-1.3,0.07*y+1+i/10,0.6*z-4.2,'FaceLighting','none', ...
     'LineStyle','none','FaceColor',[10/255 0 0]); 
@@ -317,12 +307,13 @@ for i =-5:5
     rotate(h,[0 1 0],100,[0 0 0]); light('Position',[ 0.0 -0.75 0.5]);
 end
     
-%queue
+% queue
 h = surf(0.3*x-5,0.2*y+1,0.9*z+2.5,'FaceLighting','gouraud', ...
     'LineStyle','none','FaceColor',[100/255 50/255 0]); 
 rotate(h,[0 1 0],120,[0 0 0]); light('Position',[ 0.0 -0.75 0.5]);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % Corps de Pikatchu
 h = surf(5*xP + 10,5*yP + 10,5*zP + 4, ...
     'FaceLighting','gouraud', 'LineStyle','none', ...
@@ -395,9 +386,6 @@ end
 
 
 
-
-
-
 function modeEgg(top, bottom, dt)
 % Dessine l'oeuf
 
@@ -406,10 +394,6 @@ figure;
 surf(x,y,z); axis('off'); axis('equal');
 
 end
-
-
-
-
 
 
 

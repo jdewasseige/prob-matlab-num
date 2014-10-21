@@ -27,7 +27,7 @@ end
     
 end
 
-
+% DISCONTINUITE POUR LES PETITS FUTES
 % Nous savons qu'une B-spline ne peut etre
 % non nulle que sur un intervalle [ T_i,T_i+p+1 [
 % Dans notre cas, p=2 . Si le dernier noeud est triple , on aura donc
@@ -48,7 +48,7 @@ function [x y z] = makeEgg(top, bottom, dt)
 T = [0 0 0 1 1 2 2 3] ;
 S = [0 0 0 1 1 2 2 3 3 4 4 5] ;
 R = [0 1 1 1 0];
-H = [-1*bottom -1*bottom 0 1*top 1*top];%allongements relatifs
+H = [-1*bottom -1*bottom 0 1*top 1*top]; % allongements relatifs
 
 % En posant les points Xc et Yc tels que ci-dessous,
 % et en developpant le probleme pour u=(x(t),y(t)),
@@ -151,13 +151,13 @@ rotate(h,[0 1 0],120,[0 0 0]); light('Position',[ 0.0 -0.75 0.5]);
 
 
 light('Position',[-0.5 -0.75 0.5]); 
-axis('on'); axis('equal');view([0 0]);
+axis('off'); axis('equal');view([0 0]);
 
 end
 
 
 function makeThing2()
-% Fonction qui dessine Pikatchu avec des oeufs
+% Fonction qui dessine Pikatchu ainsi que des oeufs
 
 figure('Color',[1 1 1]); 
 [x y z] = makeEgg(2,1,0.05);    % Oeuf
@@ -230,25 +230,25 @@ h = surf(1.5*x+11,1.5*y+5,1.5*z+7.5,'FaceLighting','gouraud',...
     'LineStyle','none','FaceColor',[1 1 0]);
 rotate(h,[1 0 0],50, [11 5 7.5]);
 
+% Oeuf noir
+h = surf(2*x+2,2*y+5,2*z + 1.8, ...
+    'FaceLighting','gouraud', 'LineStyle','none',...
+    'FaceColor',[0 0 0]); 
+rotate(h,[0 1 0],-50, [2 5 0]);
+light('Position',[ 0.0 -0.75 0.5]);
 
-% Jaune
+% Oeuf jaune
 h = surf(x,y,z,'FaceLighting','gouraud', 'LineStyle',...
     'none','FaceColor',[1 1 0]); 
 
-% Noir
-h = surf(1.5*x+4,1.5*y+3,1.5*z+0.5,'FaceLighting','gouraud',...
-    'LineStyle','none','FaceColor',[0 0 0]); 
-
-% Rouge
-h = surf(2*x+3,2*y+5,2*z, ...
-    'FaceLighting','gouraud', 'LineStyle','none',...
-    'FaceColor',[0.9 0.1 0.1]); 
-%rotate(h,[0 1 0],-60);
-light('Position',[ 0.0 -0.75 0.5]);
+% Oeuf rouge
+h = surf(1.5*x+4,1.5*y+2,1.5*z+0.5,'FaceLighting','gouraud',...
+    'LineStyle','none','FaceColor',[0.9 0.1 0.1]);
+rotate(h,[1 0 0],35, [4 2 0.5]);
 
 
 light('Position',[-0.5 -0.75 0.5]); 
-axis('on'); axis('equal');view([0 0]);
+axis('off'); axis('equal');view([0 0]);
 
 end
 

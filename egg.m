@@ -16,6 +16,7 @@ if ~mode
 else
     makeThing();
     makeThing2();
+    makeThing3();
 end
     
 end
@@ -152,10 +153,6 @@ h = surf(1.5*x+11,1.5*y+5,1.5*z+7.5,'FaceLighting','gouraud',...
 rotate(h,[1 0 0],50, [11 5 7.5]);
 
 
-
-
-
-
 % Jaune
 h = surf(x,y,z,'FaceLighting','gouraud', 'LineStyle',...
     'none','FaceColor',[1 1 0]); 
@@ -173,6 +170,134 @@ light('Position',[ 0.0 -0.75 0.5]);
 
 light('Position',[-0.5 -0.75 0.5]); 
 axis('on'); axis('equal');view([0 0]);
+
+end
+
+function makeThing3()
+figure('Color',[1 1 1]); 
+[x y z] = makeEgg(2,2,0.05); 
+[xP yP zP] = makeEgg(2,1,0.05);    % Oeuf
+[xC yC zC] = makeEgg(1,1,0.05); % Cercle
+[xS yS zS] = makeEgg(3,3,0.05); % Suppositoire
+
+
+%pattes
+h = surf(x,y,z,'FaceLighting','gouraud', ...
+    'LineStyle','none','FaceColor','g'); 
+rotate(h,[0 1 0],0,[0 0 0]); hold on; 
+h = surf(0.9*x-2.5,0.9*y+2,0.9*z-0.5, 'FaceLighting','gouraud', ...
+    'LineStyle','none','FaceColor','b'); 
+rotate(h,[0 1 0],20,[0 0 0]); hold on; 
+h = surf(0.9*x+4,0.9*y,0.9*z,'FaceLighting','gouraud', ...
+    'LineStyle','none','FaceColor','r'); 
+rotate(h,[0 1 0],-15,[0 0 0]); hold on; 
+h = surf(0.8*x+2,0.8*y+2.5,0.8*z+1,'FaceLighting','gouraud', ...
+    'LineStyle','none','FaceColor','k'); 
+rotate(h,[0 1 0],10,[0 0 0]); hold on; 
+
+%corps
+h = surf(2*x-2,2*y+1,2*z+1,'FaceLighting','gouraud', ...
+    'LineStyle','none','FaceColor','c'); 
+rotate(h,[0 1 0],80,[0 0 0]); light('Position',[ 0.0 -0.75 0.5]);
+
+%cou
+h = surf(0.9*x+0.5,0.9*y+1,0.9*z-4.5,'FaceLighting','gouraud', ...
+    'LineStyle','none','FaceColor',[60/255 30/255 0]); 
+rotate(h,[0 1 0],140,[0 0 0]); light('Position',[ 0.0 -0.75 0.5]);
+%tete
+h = surf(0.9*x-3,0.9*y+1,0.9*z-5,'FaceLighting','gouraud', ...
+    'LineStyle','none','FaceColor',[60/255 30/255 0]); 
+rotate(h,[0 1 0],100,[0 0 0]); light('Position',[ 0.0 -0.75 0.5]);
+
+%visage
+h = surf(0.3*x-3.3,0.9*y+1,0.2*z-6,'FaceLighting','gouraud', ...
+    'LineStyle','none','FaceColor',[204/255 0/255 0]); 
+rotate(h,[0 1 0],100,[0 0 0]); light('Position',[ 0.0 -0.75 0.5]);
+
+%cheveux
+for i =-5:5
+    h = surf(0.09*x-1.3,0.07*y+1+i/10,0.6*z-4.2,'FaceLighting','none', ...
+    'LineStyle','none','FaceColor',[10/255 0 0]); 
+    rotate(h,[0 1 0],130,[0 0 0]); light('Position',[ 0.0 -0.75 0.5]);
+    h = surf(0.09*x-3.85,0.07*y+1+i/10,0.6*z-4.8,'FaceLighting','none', ...
+    'LineStyle','none','FaceColor',[10/255 0 0]); 
+    rotate(h,[0 1 0],100,[0 0 0]); light('Position',[ 0.0 -0.75 0.5]);
+end
+    
+%queue
+h = surf(0.3*x-5,0.2*y+1,0.9*z+2.5,'FaceLighting','gouraud', ...
+    'LineStyle','none','FaceColor',[100/255 50/255 0]); 
+rotate(h,[0 1 0],120,[0 0 0]); light('Position',[ 0.0 -0.75 0.5]);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Corps de Pikatchu
+h = surf(5*xP + 10,5*yP + 10,5*zP + 4,'FaceLighting','gouraud', 'LineStyle','none', ...
+    'FaceColor',[1 1 0]); hold on;
+
+% Head
+h = surf(5*xC + 10,5*yC + 10,5*zC + 12, ...
+    'FaceLighting','gouraud', 'LineStyle','none', ...
+    'FaceColor',[1 1 0]);
+
+% Pied gauche
+h = surf(1.5*xP+6,1.5*yP+10,1.5*zP+0.5,'FaceLighting','gouraud',...
+    'LineStyle','none','FaceColor',[1 1 0]);
+rotate(h,[0 1 0],-50, [6 10 0.5]);
+
+% Pied droit
+h = surf(1.5*xP+10,1.5*yP+6,1.5*zP+0.5,'FaceLighting','gouraud',...
+    'LineStyle','none','FaceColor',[1 1 0]);
+rotate(h,[1 0 0],50, [10 6 0.5]);
+
+% Oreille gauche
+h = surf(1.5*xS+8.5,1.5*yS+12.5,1.5*zS+16,'FaceLighting','gouraud',...
+    'LineStyle','none','FaceColor',[1 1 0]);
+rotate(h,[1/2 1 0],-80, [8.5 12.5 16]);
+
+% Oreille droite
+h = surf(1.5*xS+12.5,1.5*yS+8.5,1.5*zS+16,'FaceLighting','gouraud',...
+    'LineStyle','none','FaceColor',[1 1 0]);
+rotate(h,[1 1/2 0],20, [12.5 8.5 16]);
+
+% Oeil gauche
+h = surf(1*xC + 6 , 1*yC + 8.5 , 1*zC + 13.8, ...
+    'FaceLighting','gouraud',...
+    'LineStyle','none','FaceColor',[0 0 0]);
+
+% Oeil droit
+h = surf(1*xC + 8.5 , 1*yC + 6 , 1*zC + 13.8, ...
+    'FaceLighting','gouraud',...
+    'LineStyle','none','FaceColor',[0 0 0]);
+
+% Joue gauche
+h = surf(1.3*xC + 6 , 1.3*yC + 9.5 , 1.3*zC + 12, ...
+    'FaceLighting','gouraud',...
+    'LineStyle','none','FaceColor',[0.9 0.1 0.1]);
+
+% Joue droite
+h = surf(1.3*xC + 9.5 , 1.3*yC + 6 , 1.3*zC + 12, ...
+    'FaceLighting','gouraud',...
+    'LineStyle','none','FaceColor',[0.9 0.1 0.1]);
+
+% Langue
+h = surf(0.75*x + 7 , 0.75*y + 7, 1*z + 12 , ...
+    'FaceLighting','gouraud',...
+    'LineStyle','none','FaceColor',[1 182/255 193/255]);
+rotate(h,[1 -1 0],120, [7 7 12]);
+
+% Bras gauche
+h = surf(1.5*xP+5,1.5*yP+11,1.5*zP+7.5,'FaceLighting','gouraud',...
+    'LineStyle','none','FaceColor',[1 1 0]);
+rotate(h,[0 1 0],-50, [5 11 7.5]);
+
+% Bras droit
+h = surf(1.5*xP+11,1.5*yP+5,1.5*zP+7.5,'FaceLighting','gouraud',...
+    'LineStyle','none','FaceColor',[1 1 0]);
+rotate(h,[1 0 0],50, [11 5 7.5]);
+
+
+light('Position',[-0.5 -0.75 0.5]); 
+axis('off'); axis('equal');view([0 0]);
 
 end
 

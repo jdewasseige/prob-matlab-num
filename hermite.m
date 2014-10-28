@@ -1,8 +1,14 @@
+% Methode Num FSAB 1104
+% Probleme MATLAB 3 : Interpolations d'Hermite
+% Etudiants : Une collaboration de :
+%                       - Antoine Legat 4776-1300
+%                       - John de Wasseige 5224-1300
+% Tuteur : Victor Colognesi
 function [uh] = hermite(n,X,U,dU,x)
-% Fonction qui renvoit les ordonnees des polynomes 
+% Fonction qui renvoie les ordonnees des polynomes 
 % d'interpolation cubique pour les abscisses x.
 %
-% input     - n : le degre du polynome d'interpolation
+% input     - n : le nombre de polynomes d'interpolation
 %           - X : abscisses des n+1 points
 %           - U : ordonnees des n+1 points
 %           - dU: valeurs des derivees premiere pour les n+1 points
@@ -11,7 +17,7 @@ function [uh] = hermite(n,X,U,dU,x)
 
 
 % On va resoudre le systeme de 4 equations (4 donnees)
-% a 4 inconnues (les coefficients des polynomes)
+% a 4 inconnues (les coefficients des polynomes cubiques)
 %
 % a X0^3  + b X0^2 + c X0 + d = U0
 % a X1^3  + b X1^2 + c X1 + d = U1
@@ -25,7 +31,7 @@ polynomes = zeros(4, n);
 
 m = length(x) ;
 uh = zeros(1,m) ;
-mem = 1;
+count = 1;
 
 for i =1:n
     A = [X(i)^3      X(i)^2    X(i)   1 ;
@@ -33,19 +39,21 @@ for i =1:n
          3*X(i)^2    2*X(i)    1      0 ;
          3*X(i+1)^2  2*X(i+1)  1      0 ] ;
 
-     b = [U(i);U(i+1);dU(i);dU(i+1)] ;
+     b = [U(i) ; U(i+1) ; dU(i) ; dU(i+1)] ;
      
      polynomes(:,i) = A\b ;
+     % "On resout un systeme lineaire, on ne l'inverse jamais..."
+     % (J. Meinguet)
      
      % Ensuite, on va assigner une valeur a uh pour chaque
-     % abscisse x qui se trouve dans [Xi;Xi+1],
-     % tout en gardant en memoire (mem) l'abscisse 
+     % abscisse x qui se trouve dans [X(i);X(i+1)],
+     % tout en gardant en memoire (count) l'abscisse 
      % de debut afin de ne pas devoir parcourir x 
      % completement pour chaque polynome.
      
-     while x(mem) < X(i+1)
-         uh(mem) = polyval(polynomes(:,i),x(mem)) ;
-         mem = mem + 1 ;
+     while x(count) < X(i+1)
+         uh(count) = polyval(polynomes(:,i),x(count)) ;
+         count = count + 1 ;
      end
      
 end

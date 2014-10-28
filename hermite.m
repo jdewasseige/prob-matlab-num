@@ -31,9 +31,9 @@ polynomes = zeros(4, n);
 
 m = length(x) ;
 uh = zeros(1,m) ;
-count = 1;
+count = 1 ;
 
-for i =1:n
+for i = 1:n
     A = [X(i)^3      X(i)^2    X(i)   1 ;
          X(i+1)^3    X(i+1)^2  X(i+1) 1 ;
          3*X(i)^2    2*X(i)    1      0 ;
@@ -51,7 +51,15 @@ for i =1:n
      % de debut afin de ne pas devoir parcourir x 
      % completement pour chaque polynome.
      
-     while x(count) < X(i+1)
+     % NB : Grace a la condition du while, on peut gerer les cas
+     %      ou on desire extrapoler a gauche et/ou a droite de
+     %      l'intervalle [X0;Xn], c'est-a-dire que certains
+     %      elements de x sont en dehors de cet intervalle.
+     % (meme si dans les cas de la fct de test_matlab3, si on prend
+     % des x allant de -0.1 a 1.1 par exemple, les valeurs
+     % extrapolees sont loin des valeurs correctes (ce qui, en
+     % soit, semble logique))
+     while count <= m && (x(count) < X(i+1) || x(count) > X(n))
          uh(count) = polyval(polynomes(:,i),x(count)) ;
          count = count + 1 ;
      end

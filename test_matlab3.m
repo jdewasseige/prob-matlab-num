@@ -5,7 +5,7 @@ X = linspace(0,1,n+1);
 U = exp(-2*X).*sin(10*pi*X);
 dU = 10*pi*exp(-2*X).*cos(10*pi*X) -2 *U;
 
-x = linspace(0,1,100);
+x = linspace(-0.1,1.1,100);
 u = exp(-2*x).*sin(10*pi*x);
 uh = hermite(n,X,U,dU,x);
 

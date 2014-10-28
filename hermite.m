@@ -37,7 +37,6 @@ for i =1:n
      
      polynomes(:,i) = A\b ;
      
-     
      % Ensuite, on va assigner une valeur a uh pour chaque
      % abscisse x qui se trouve dans [Xi;Xi+1],
      % tout en gardant en memoire (mem) l'abscisse 
@@ -52,4 +51,3 @@ for i =1:n
 end
 
 end
-

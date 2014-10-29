@@ -42,6 +42,7 @@ for i = 1:n
      b = [U(i) ; U(i+1) ; dU(i) ; dU(i+1)] ;
      
      polynomes(:,i) = A\b ;
+
      % "On resout un systeme lineaire, on ne l'inverse jamais..."
      % (J. Meinguet)
      
@@ -55,11 +56,12 @@ for i = 1:n
      %      ou on desire extrapoler a gauche et/ou a droite de
      %      l'intervalle [X0;Xn], c'est-a-dire que certains
      %      elements de x sont en dehors de cet intervalle.
-     % (meme si dans les cas de la fct de test_matlab3, si on prend
-     % des x allant de -0.1 a 1.1 par exemple, les valeurs
-     % extrapolees sont loin des valeurs correctes (ce qui, en
-     % soit, semble logique))
-     while count <= m && (x(count) < X(i+1) || x(count) > X(n))
+     % 	    (Dans le cas de la fonction de test_matlab3, si on prend
+     %      des x allant de -0.1 a 1.1 par exemple, les valeurs
+     % 	    extrapolees sont loin des valeurs correctes,
+     %      ce qui semble logique.)
+
+     while count <= m && (x(count) < X(i+1) || x(count) > X(n+1))
          uh(count) = polyval(polynomes(:,i),x(count)) ;
          count = count + 1 ;
      end

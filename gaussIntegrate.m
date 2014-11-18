@@ -1,9 +1,3 @@
-% Methode Num FSAB 1104
-% Probleme MATLAB 4 : Calcul du volume du musee de LLN
-% Etudiants : Une collaboration de :
-%                       - Antoine Legat 4776-1300
-%                       - John de Wasseige 5224-1300
-% Tuteur : Victor Colognesi
 function [Ih] = gaussIntegrate(L,z,error)
 % gaussIntegrate - Numerically evaluate volume under the surface 'z', 
 %                  over a centered square of length '2L' and giving 
@@ -14,12 +8,19 @@ function [Ih] = gaussIntegrate(L,z,error)
 % Class support for input L : integer.
 %                   input error and output Ih : float single/double.
 
+% Methode Num FSAB 1104
+% Probleme MATLAB 4 : Calcul du volume du musee de LLN
+% Etudiants : Une collaboration de :
+%                       - Antoine Legat 4776-1300
+%                       - John de Wasseige 5224-1300
+% Tuteur : Victor Colognesi
+
 assert(isfloat(error), 'error is not a number') ;
 assert(rem(L,1)==0, 'L is not an integer') ;
 error = abs(error) ;
 
 % First evaluation of the integral for a step of L.
-I0 = calcLocalVolume(L,z,0,0);
+I0 = calcLocalVolume(L,z,0,0) ;
 Ih = getNextIh(L/2,0,0,z,error/4,I0) ;
 
 % divide basis in n*n squares 
@@ -49,7 +50,7 @@ for i=1:4
     %
     % For example after 3 calls of the 'getNextIh' function,
     % 1/[I(0,0)] 2/[I(1,0) I(1,1)] 3/[I(2,0) I(2,1) I(2,2)] ...
-    InextR = getNextR(Inext,Ip);
+    InextR = getNextR(Inext,Ip) ;
     
     % Check if difference btw current best value and previous best value
     % is smaller than error.

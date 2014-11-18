@@ -4,7 +4,7 @@ function [Ih] = gaussIntegrate(L,z,error)
 %                  an error lower than 'error'.
 %
 % Ih = gaussIntegrate(L,Z,ERROR).... where Z is a two-variable function.
-% 
+%
 % Class support for input L : integer.
 %                   input error and output Ih : float single/double.
 

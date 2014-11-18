@@ -10,7 +10,9 @@ function [Ih] = gaussIntegrate(L,z,error)
 % Class support for input L : integer.
 %                   input error and output Ih : float single/double.
 
-
+assert(isfloat(error), 'error is not a number') ;
+assert(rem(L,1)==0, 'L is not an integer') ;
+error = abs(error) ;
 
 % First evaluation of the integral for a step of L.
 I0 = calcLocalVolume(L,z,0,0);
@@ -32,7 +34,7 @@ addX = [-1 -1  1 1] ;
 addY = [-1  1 -1 1] ;
 
 total = 0 ;
-
+Inext = 0 ;
 for i=1:4
     % Compute volume of each smaller square.
     Inext = calcLocalVolume(L,z,addX(i)*L +x,addY(i)*L +y) ;
@@ -48,6 +50,7 @@ for i=1:4
     % Check if difference btw current best value and previous best value
     % is smaller than error.
     % If not, we continue with 4 smaller squares.
+    
     if abs(InextR(end)-InextR(end-1)) > error
         out = getNextIh(L/2,addX(i)*L +x, addY(i)*L +y, z, error/4,...
             InextR./4) ;
@@ -59,7 +62,7 @@ end
 
 end
 
-function out = getNextR(In,Ip);
+function out = getNextR(In,Ip)
 
 out = zeros(1,length(Ip)+1) ;
 out(1) = In ;

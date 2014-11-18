@@ -3,8 +3,11 @@ function [Ih] = gaussIntegrate(L,z,error)
 %                  over a centered square of length '2L' and giving 
 %                  an error lower than 'error'.
 %
-% Ih = gaussIntegrate(L,Z,ERROR).... where Z is a two-variable function.
 % 
+%   L is the half of the length of the square
+%   z is the two-variable function to integrate
+%   error is the maximum error between Ih and the real value I
+%
 % Class support for input L : integer.
 %                   input error and output Ih : float single/double.
 

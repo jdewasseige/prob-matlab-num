@@ -1,5 +1,8 @@
 function [Ih] = gaussIntegrate_NAZE(z, error)
 n = 2;
+% Pas oublier de rendre le code robuste
+% Pas oublier de faire le chgt de variable [-L, L] => [-1, 1]
+
 % Calcule Ih par G-L avec n+1 points entre -1 et 1
 
 [w, X] = WandXGaussLegendre(n);
@@ -12,4 +15,3 @@ end
 
 
 end
-

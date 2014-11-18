@@ -1,11 +1,15 @@
+% Methode Num FSAB 1104
+% Probleme MATLAB 4 : Calcul du volume du musee de LLN
+% Etudiants : Une collaboration de :
+%                       - Antoine Legat 4776-1300
+%                       - John de Wasseige 5224-1300
+% Tuteur : Victor Colognesi
 function [Ih] = gaussIntegrate(L,z,error)
 % gaussIntegrate - Numerically evaluate volume under the surface 'z', 
 %                  over a centered square of length '2L' and giving 
 %                  an error lower than 'error'.
 %
 % Ih = gaussIntegrate(L,Z,ERROR).... where Z is a two-variable function.
-%
-% Example: ...
 % 
 % Class support for input L : integer.
 %                   input error and output Ih : float single/double.
@@ -61,6 +65,7 @@ for i=1:4
 end
 
 end
+
 
 function out = getNextR(In,Ip)
 

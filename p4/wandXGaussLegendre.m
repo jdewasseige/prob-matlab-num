@@ -1,4 +1,4 @@
-function [ sol_w, sol_X ] = WandXGaussLegendre( n )
+function [sol_w, sol_X] = WandXGaussLegendre(n)
 % Retourne w et X pour G-L avec n
 %w = double ( zeros(n+1,1) );
 %X = double ( zeros(n+1,1) );

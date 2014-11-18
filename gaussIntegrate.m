@@ -70,7 +70,7 @@ end
 
 end
 
-% Compute the volume under the function Z in a square of length L, 
+% Compute the volume under the function Z in a square of length 2L, 
 % centered in (x,y).
 function out = calcLocalVolume(L,z,x,y)
 

@@ -45,11 +45,12 @@ dudx = u; % To make sure the dimensions are OK
 m = 10;
 k = 140;
 L = 1;
+g = 9.81;
 C = 10;
 I = (m*(2*L)^2) / 3;
 
 dudx(1) = u(2); 
-dudx(2) = ( Mressort_synthetic(k,L,u(1)) + m*9.81*L*sin(u(1)) ...
+dudx(2) = ( Mressort_synthetic(k,L,u(1)) + m*g*L*sin(u(1)) ...
             - C*u(2) ) / I;
 end
 

@@ -1,4 +1,4 @@
-function [ Mressort ] = Mressort_synthetic(k,L,theta)
+function [ Mressort ] = Mressort_synthetic()%(k,L,theta)
 %Mressort_synthetic - Compute the torque of the force of
 %                     the spring, using analytic calculation.
 %
@@ -7,6 +7,9 @@ function [ Mressort ] = Mressort_synthetic(k,L,theta)
 %   our solution.
 %
 %   [ Mressort ] = Mressort_synthetic(k,L,theta)
+
+syms k L
+syms Mressort(theta)
 
 x = L*sqrt( 3-2*sqrt(2)*cos(pi/4 + theta) ) ;
 thesinB = sqrt(2)*L*sin(pi/4 + theta ) / x ;

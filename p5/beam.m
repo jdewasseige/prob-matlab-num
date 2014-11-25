@@ -1,17 +1,16 @@
 function [X,U] = beam()
-%beam - Compute the solution of the Cauchy's problem given,
-%       using Runge-Kutta's method.
+%BEAM - Compute the approximated solution of the Cauchy's
+%       problem given, using Runge-Kutta's method 4th order.
 %
+%   You can get the problem statement <a
+%   href="http://perso.uclouvain.be/vincent.legat/teaching/bac-q3/data/probleme-problem1415-5.pdf">here</a>.
 %   We computed the result of the same problem using the
-%   MATLAB function ode45 and had the same result, which
+%   MATLAB function ode45 and had the same plot, which
 %   proves us that it works well.
 %
-%   [X,U] = beam()
-
-% TODO : - + de blabla
-%        - improve robustesse
-%        - verifier signes Mressort et 9.81
-%        - pq ca se met pas en gras dans la description?
+%   [X,U] = BEAM()
+%   X and U are vectors of the same length that represent
+%   a set of points, these are the approximated solution.
 
 % Methode Num FSAB 1104
 % Probleme MATLAB 5 : Un peu de mecanique...

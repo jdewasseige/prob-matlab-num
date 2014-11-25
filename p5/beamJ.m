@@ -1,6 +1,6 @@
 
 
-function [X,U] = beamDraft()
+function [X,U] = beam()
 
 Xstart = 0;
 Xend   = 15;
@@ -26,6 +26,34 @@ end
 function dudx = f(x,u)
 dudx = u;
 
+m = 10 ;
+k = 140;
+L = 1  ;
+C = 10 ;
+g = 9.81 ;
+Lr = 11*L/10 ;
+
+cte = 3/(m*(2*L)^2) ;
+
+longx = Lr + 2*L*sin(u(1)/2)*cos(u(1)/2) ;
+longy = 2*L*sin(u(1)/2)*sin(u(1)/2) ;
+long = sqrt(longx^2 + longy^2) ;
+
+deltaX = long - Lr ;
+Fressort = -k*deltaX ;
+
+Mressort= Fressort*L ;
+
+Mpoids = -L*sin(u(1))*m*g ;
+
 dudx(1) = u(2);
-dudx(2) = cos(x);
+dudx(2) = cte*(Mressort + Mpoids - C*u(2));
+
 end
+
+
+
+
+
+
+

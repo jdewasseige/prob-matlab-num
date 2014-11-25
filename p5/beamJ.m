@@ -35,19 +35,26 @@ Lr = 11*L/10 ;
 
 cte = 3/(m*(2*L)^2) ;
 
-longx = Lr + 2*L*sin(u(1)/2)*cos(u(1)/2) ;
-longy = 2*L*sin(u(1)/2)*sin(u(1)/2) ;
+corde = 2*L*sin(u(1)/2) ;
+
+longx = L + corde*cos(u(1)/2) ;
+longy = corde*sin(u(1)/2) ;
 long = sqrt(longx^2 + longy^2) ;
 
 deltaX = long - Lr ;
 Fressort = -k*deltaX ;
 
-Mressort= Fressort*L ;
+r = [L*sin(u(1)) L*cos(u(1)) 0] ;
 
-Mpoids = -L*sin(u(1))*m*g ;
+F_r = [longx -longy 0].*Fressort/long ;
+F_p = [0 -m*g 0] ;
+
+Mressort= cross(r,F_r) ;
+
+Mpoids  = cross(r,F_p) ;
 
 dudx(1) = u(2);
-dudx(2) = cte*(Mressort + Mpoids - C*u(2));
+dudx(2) = cte*(Mressort(3) + Mpoids(3) - C*u(2));
 
 end
 

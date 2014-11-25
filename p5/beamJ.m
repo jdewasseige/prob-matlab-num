@@ -46,7 +46,7 @@ Fressort = -k*deltaX ;
 
 r = [L*sin(u(1)) L*cos(u(1)) 0] ;
 
-F_r = [longx -longy 0].*Fressort/long ;
+F_r = [(-L-L*sin(u(1))) -(L-L*cos(u(1))) 0].*Fressort/long ;
 F_p = [0 -m*g 0] ;
 
 Mressort= cross(r,F_r) ;

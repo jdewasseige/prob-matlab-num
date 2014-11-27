@@ -1,5 +1,3 @@
-
-
 function [X,U] = beam()
 
 Xstart = 0;
@@ -22,7 +20,6 @@ end
 end
 
 
-
 function dudx = f(x,u)
 dudx = u;
 
@@ -33,34 +30,59 @@ C = 10 ;
 g = 9.81 ;
 Lr = 11*L/10 ;
 
-cte = 3/(m*(2*L)^2) ;
-
-corde = 2*L*sin(u(1)/2) ;
-
-longx = L + corde*cos(u(1)/2) ;
-longy = corde*sin(u(1)/2) ;
-long = sqrt(longx^2 + longy^2) ;
-
-deltaX = long - Lr ;
-Fressort = -k*deltaX ;
+inertia = (m*(2*L)^2)/3 ;
 
 r = [L*sin(u(1)) L*cos(u(1)) 0] ;
-
-F_r = [(-L-L*sin(u(1))) -(L-L*cos(u(1))) 0].*Fressort/long ;
-F_p = [0 -m*g 0] ;
-
-Mressort= cross(r,F_r) ;
-
+F_p = [0 m*g 0] ;
 Mpoids  = cross(r,F_p) ;
 
+Mressort = calcMressort_s(k,u(1),Lr) ;
+
 dudx(1) = u(2);
-dudx(2) = cte*(Mressort(3) + Mpoids(3) - C*u(2));
+dudx(2) = (Mressort + Mpoids(3) - C*u(2))/inertia ;
 
 end
 
 
+function Mressort = calcMressort_s(k,theta,Lr)
+% synthetic way
+
+L = 1 ;
+
+%longueur du ressort en fonction de theta
+long = sqrt((-L-sin(theta)*L)^2 +(L-L*cos(theta))^2) ;
+
+% théorème d'Al-Kashi
+cosN = ((sqrt(2)*L)^2 - L^2 - long^2)/(-2*L*long) ;
+
+deltaX = long-Lr ;
+Fressort = -k*deltaX ;
+Mressort = L*Fressort*sqrt(1-cosN^2) ;
+
+end
 
 
+function Mressort = calcMressort_a(k,theta,Lr) 
+% using coordinate system way 
+
+L = 1 ;
+
+corde = 2*L*sin(theta/2) ;
+
+longx = L + corde*cos(theta/2) ;
+longy = abs(corde*sin(theta/2)) ;
+%long = sqrt(longx^2 + longy^2) ;
+long = sqrt((-L-sin(theta)*L)^2 +(L-L*cos(theta))^2) ;
 
 
+deltaX = long - Lr ;
+Fressort = -k*deltaX ;
 
+r = [L*sin(theta) L*cos(theta) 0] ;
+
+F_r = [longx*(-L-L*sin(theta)) -longy*(L-L*cos(theta)) 0].*Fressort/long ;
+
+Mressort_v = cross(r,F_r) ;
+Mressort = Mressort_v(3) ;
+
+end

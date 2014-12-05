@@ -1,4 +1,4 @@
-function [theta] = adjustFire(y0,v0,epsilon,h,f)
+function [theta] = adjustFire(y0,v0,epsilon,h,f,bonus)
 %ADJUSTFIRE - Compute the optimal elevation angle in order to
 %             maximize the distance traveled by a shell thrown
 %             from a height y0 at a velocity v0.
@@ -10,11 +10,12 @@ function [theta] = adjustFire(y0,v0,epsilon,h,f)
 %   the Heun integration method and the bisection method to solve this
 %   problem.
 %
-%   [theta] = ADJUSTFIRE(y0,v0,epsilon,h,f)
+%   [theta] = ADJUSTFIRE(y0,v0,epsilon,h,f,bonus)
 %   - epsilon is the required precision for theta ;
 %   - h is the integration step for the Heun integration ;
 %   - f is the function containing the equations describing the
-%     trajectory of the shell.
+%     trajectory of the shell ;
+%   - bonus, if equal to 1, we use a faster algorithm.
 
 
 % Methode Num FSAB 1104
@@ -24,6 +25,10 @@ function [theta] = adjustFire(y0,v0,epsilon,h,f)
 %                       - John de Wasseige 5224-1300
 % Tuteur : Victor Colognesi
 % Merci pour tes chokotoffs je viens de m'en mettre un :D
+
+if nargin < 6
+    bonus = 0;
+end
 
 thetaMin = 0;
 thetaMax = 90;

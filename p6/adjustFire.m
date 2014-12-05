@@ -30,6 +30,9 @@ if nargin < 6
     bonus = 0;
 end
 
+epsilon = abs(epsilon);
+h       = abs(h);
+
 thetaMin = 0;
 thetaMax = 90;
 while abs(thetaMax - thetaMin) > 2*epsilon
@@ -65,14 +68,6 @@ end
 %   - theta est en degres
 
 
-% La fonction HeunIntegrate integre les equations differentielles ordinaires
-% avec la methode de Heun. Les conditions initiales sont specifiees par les
-% arguments y0, v0 et theta. Le pas est donne par h. Cette fonction est  
-% evidemment necessaire pour la precedente. L integration temporelle se
-% fait jusqu au moment ou la hauteur de l obus est nulle. La longueur du
-% dernier pas sera adaptee afin d obtenir une valeur nulle pour la derniere
-% hauteur. La fonction retourne la distance horizontale parcourue.
-
 function [distance] = HeunIntegrate(theta,y0,v0,h,f)
 %HEUNINTEGRATE - Integrate the EDO's using the Heun integration
 %                method.
@@ -82,7 +77,7 @@ function [distance] = HeunIntegrate(theta,y0,v0,h,f)
 %
 %   [distance] = HEUNINTEGRATE(theta,y0,v0,h,f)
 %   - distance is the distance traveled by the shell ;
-%   - theta is the elevation angle ;
+%   - theta is the elevation angle in DEGREES;
 %   - y0 is the initial height ;
 %   - v0 is the initial speed ;
 %   - h is the integration step for the Heun integration ;
@@ -103,6 +98,7 @@ U(4) = y0;
 % hauteur. Presque car nous avons du introduire un epsilon
 % puisque l'identiquement nul est difficilement atteignable
 % en calcul numerique a virgule...
+
 while h > epsilon
     K1 = f(U);
     K2 = f(U+h*K1);

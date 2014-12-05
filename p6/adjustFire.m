@@ -53,25 +53,16 @@ while abs(thetaMax - thetaMin) > 2*epsilon
     
     fprintf('==== New interval is [%f, %f]\n',thetaMin,thetaMax);
     fprintf('     Distance = %f : error = %f\n',distMax,thetaMax - thetaMin);
-    input('      Press any key to do next iteration \n');
-    pause;
+    % Vous pouvez "de-commenter" les deux lignes suivantes pour pouvoir
+    % commander les iterations une par une (ca ralentit le programme).
+    %input('      Press any key to do next iteration \n');
+    %pause;
 end
 theta = (thetaMin + thetaMax) / 2;
 
 end
 
-% Idees :
-%   - gerer si f est une fct vectorielle de taille differente que 4
-%   - theta est en degres
 
-
-% La fonction HeunIntegrate integre les equations differentielles ordinaires
-% avec la methode de Heun. Les conditions initiales sont specifiees par les
-% arguments y0, v0 et theta. Le pas est donne par h. Cette fonction est  
-% evidemment necessaire pour la precedente. L integration temporelle se
-% fait jusqu au moment ou la hauteur de l obus est nulle. La longueur du
-% dernier pas sera adaptee afin d obtenir une valeur nulle pour la derniere
-% hauteur. La fonction retourne la distance horizontale parcourue.
 
 function [distance] = HeunIntegrate(theta,y0,v0,h,f)
 %HEUNINTEGRATE - Integrate the EDO's using the Heun integration
@@ -109,8 +100,10 @@ while h > epsilon
     Unew = U + h*(K1+K2)/2;
     if Unew(4) > 0
         U = Unew;
-        subplot(2,1,1);
-        plot(U(2),U(4),'.r','MarkerSize',5); hold on;
+        % Vous pouvez "de-commenter" les deux lignes suivantes
+        % pour avoir les graphes des trajectoires (ca ralentit le programme).
+        %subplot(2,1,1);
+        %plot(U(2),U(4),'.r','MarkerSize',5); hold on;
     else
         h = h/2;
     end

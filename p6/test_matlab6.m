@@ -17,7 +17,7 @@ function test_matlab6
 
     shot = 0;
     %adjustFire(-200,-200,-0.01,-0.05,@f,0);
-    adjustFire(88.48,42,0.01,0.05,@f,1);
+    adjustFire(88.48,42,0.01,0.05,@f);
     fprintf('=== Number of shots : %d \n', shot);
 
 end

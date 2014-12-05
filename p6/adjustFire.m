@@ -7,15 +7,15 @@ function [theta] = adjustFire(y0,v0,epsilon,h,f,bonus)
 %   href="http://perso.uclouvain.be/vincent.legat/teaching/bac-q3/data/probleme-problem1415-6.pdf">here</a>.
 %   Supposing that the distance versus the elevation angle was unimodal, we
 %   could use the "surrounding technique" described in the problem statement,
-%   the Heun integration method and the bisection method to solve this
-%   problem.
+%   the Heun integration method and a method inspired of the bisection method
+%   to solve this problem.
 %
 %   [theta] = ADJUSTFIRE(y0,v0,epsilon,h,f,bonus)
 %   - epsilon is the required precision for theta ;
 %   - h is the integration step for the Heun integration ;
 %   - f is the function containing the equations describing the
 %     trajectory of the shell ;
-%   - bonus, if equal to 1, we use a faster algorithm.
+%   - bonus, if different to 0, we use a faster algorithm.
 
 
 % Methode Num FSAB 1104
@@ -70,6 +70,16 @@ if bonus == 0
     theta = (thetaMin + thetaMax) / 2;
     
 else
+    % On utilise les differences centrees et la methode de la
+    % bissection. Desole pour le code peu comprehensible.
+    % On decoupe l'intervalle [thetaMin;thetaMax] en 4 en nommant
+    % les points a,b,c,d et e.
+    % a = thetaMin et e = thetaMax.
+    % Cet algo est plus efficace car comme vous allez le voir,
+    % l'intervalle est divise par 2 ou par 4 a chaque iteration,
+    % ce qui est bien meilleur que 2/3. En effet, pour l'exemple,
+    % on arrive a la solution en 23 shots plutot que 42 (pour
+    % bonus==0).
     distA = HeunIntegrate(thetaMin,y0,v0,h,f);
     distE = 0;
     
@@ -80,20 +90,22 @@ else
         d = thetaMin + 3*(thetaMax - thetaMin)/4;
         distC = HeunIntegrate(c,y0,v0,h,f);
         
+        %dx/dtheta (b) :
         dxB = (distA - distC)/abs(c - thetaMin);
+        %dx/dtheta (d) :
         dxD = (distC - distE)/abs(thetaMax - c);
         
-        if dxB*dxD < 0
+        if dxB*dxD < 0 % racine dans [b,d]
             distA = HeunIntegrate(b,y0,v0,h,f);
             distE = HeunIntegrate(d,y0,v0,h,f);
             thetaMin = b;
             thetaMax = d;
             distMax = distC;
-        elseif dxB >= 0
+        elseif dxB >= 0 % racine dans [a,b]
             distE = HeunIntegrate(b,y0,v0,h,f);
             thetaMax = b;
             distMax = distE;
-        else
+        else % racine dans [d,e]
             distA = HeunIntegrate(d,y0,v0,h,f);
             thetaMin = d;
             distMax = distA;
@@ -114,6 +126,8 @@ else
 end
 
 end
+
+
 
 
 function [distance] = HeunIntegrate(theta,y0,v0,h,f)
@@ -141,7 +155,8 @@ U(2) = 0;
 U(3) = v0*sind(theta);
 U(4) = y0;
 
-% On utilise la methode de la bissection pour s'assurer
+% On utilise une methode ressemblant a la methode de la
+% bissection pour s'assurer
 % d'obtenir une valeur (presque) nulle pour la derniere
 % hauteur. Presque car nous avons du introduire un epsilon
 % puisque l'identiquement nul est difficilement atteignable

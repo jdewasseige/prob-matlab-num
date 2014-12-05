@@ -16,7 +16,7 @@ function test_matlab6
     axis manual; hold on;
 
     shot = 0;
-    adjustFire(-200,-200,-0.01,-0.05,@f,0);
+    adjustFire(88.48,42,0.01,0.05,@f,0);
     %adjustFire(88.48,42,0.01,0.05,@f,0);
     fprintf('=== Number of shots : %d \n', shot);
 

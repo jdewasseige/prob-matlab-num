@@ -1,7 +1,7 @@
 function [theta] = adjustFire(y0,v0,epsilon,h,f,bonus)
 %ADJUSTFIRE - Compute the optimal elevation angle in order to
 %             maximize the distance traveled by a shell thrown
-%             from a height y0 at a velocity v0.
+%             from a height y0 at a speed v0.
 %
 %   You can get the problem statement <a
 %   href="http://perso.uclouvain.be/vincent.legat/teaching/bac-q3/data/probleme-problem1415-6.pdf">here</a>.
@@ -65,7 +65,30 @@ end
 %   - theta est en degres
 
 
+La fonction HeunIntegrate int`egre les  ?equations diff ?erentielles ordinaires
+avec la m ?ethode de Heun. Les conditions initiales sont sp ?ecifi ?ees par les
+arguments y0, v0 et theta. Le pas est donn ?e par h. Cette fonction est  
+evidemment n ?ecessaire pour la pr ?ec ?edente. L?int ?egration temporelle se
+fait jusqu?au moment ou` la hauteur de l?obus est nulle. La longueur du
+dernier pas sera adapt ?e afin d?obtenir une valeur nulle pour la derni`ere
+hauteur. La fonction retourne la distance horizontale parcourue.
+
 function [distance] = HeunIntegrate(theta,y0,v0,h,f)
+%HEUNINTEGRATE - Integrate the EDO's using the Heun integration
+%                method.
+%
+%   y0, v0 and theta specify the initial conditions. The temporal
+%   integration stops when the height of the shell is (about) 0.
+%
+%   [distance] = HEUNINTEGRATE(theta,y0,v0,h,f)
+%   - distance is the distance traveled by the shell ;
+%   - theta is the elevation angle ;
+%   - y0 is the initial height ;
+%   - v0 is the initial speed ;
+%   - h is the integration step for the Heun integration ;
+%   - f is the function containing the equations describing the
+%     trajectory of the shell.
+
 
 epsilon = 0.0001; % precision requise pour hauteur nulle
 global shot

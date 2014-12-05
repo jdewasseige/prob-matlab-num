@@ -4,7 +4,7 @@ function test_matlab6
 
     close all;
 
-    figure(),
+    figure();
     subplot(2,1,1)
     axis([0 300 0 200]); 
     title('Trajectories');

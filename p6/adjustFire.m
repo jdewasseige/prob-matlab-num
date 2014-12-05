@@ -31,7 +31,7 @@ function [theta] = adjustFire(y0,v0,epsilon,h,f,bonus)
 y0 = abs(y0);
 v0 = abs(v0);
 epsilon = abs(epsilon);
-h = abs(h);
+h       = abs(h);
 
 if nargin < 6
     bonus = 0;

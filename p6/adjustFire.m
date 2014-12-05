@@ -1,5 +1,7 @@
 function [theta] = adjustFire(y0,v0,epsilon,h,f)
 
+
+% Merci pour tes chokotoffs je viens de m'en mettre un haha
     thetaMin = 0;
     thetaMax = 90;
     while abs(thetaMax - thetaMin) > 2*epsilon
@@ -36,6 +38,7 @@ end
 
 function [distance] = HeunIntegrate(theta,y0,v0,h,f)
 
+    epsilon = 0.0001; % précision requise pour hauteur nulle
     global shot
     U = zeros(4);
     U(1) = v0*cosd(theta);
@@ -45,15 +48,16 @@ function [distance] = HeunIntegrate(theta,y0,v0,h,f)
 
     subplot(2,1,1);
     
-    while U(4) >= 0
+    while h > epsilon %U(4) >= 0 && abs(U(4) - Unew(4)) > epsilon/2
         K1 = f(U);
         K2 = f(U+h*K1);
-        U = U + h*(K1+K2)/2;
+        Unew = U + h*(K1+K2)/2;
+        if Unew(4) > 0
+            U = Unew;
+        else
+            h = h/2;
+        end     
     end
-    % Je bloque un peu sur ça (cfr énoncé) :
-    % "La longueur du dernier pas sera adaptee afin
-    % d'obtenir une valeur nulle pour la derniere hauteur."
-    % Faut faire avec la méthode de la bissection !
 
     distance  = U(2);
     subplot(2,1,2);

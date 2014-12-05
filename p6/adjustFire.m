@@ -26,6 +26,12 @@ function [theta] = adjustFire(y0,v0,epsilon,h,f,bonus)
 % Tuteur : Victor Colognesi
 % Merci pour tes chokotoffs je viens de m'en mettre un :D
 
+% Robustesse :
+y0 = abs(y0);
+v0 = abs(v0);
+epsilon = abs(epsilon);
+h = abs(h);
+
 if nargin < 6
     bonus = 0;
 end

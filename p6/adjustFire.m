@@ -1,17 +1,22 @@
-function [theta] = adjustFireDraft(y0,v0,epsilon,h,f)
+function [theta] = adjustFire(y0,v0,epsilon,h,f)
 
     thetaMin = 0;
     thetaMax = 90;
     while abs(thetaMax - thetaMin) > 2*epsilon
-%
-% A completer (les deux lignes qui suivent sont des stupidites 
-%              qui servent juste a obtenir un truc bizarre) 
-%
-        thetaMax = thetaMax/7.0;
-        distMax = 0;
-%
-%
-%
+        
+        b = thetaMin + (thetaMax - thetaMin)/3;
+        c = thetaMin + 2*(thetaMax - thetaMin)/3;
+        distB = HeunIntegrate(b,y0,v0,h,f);
+        distC = HeunIntegrate(c,y0,v0,h,f);
+        
+        if distB > distC
+            thetaMax = c;
+            distMax = distB;
+        else
+            thetaMin = b;
+            distMax = distC;
+        end
+        
         subplot(2,1,2);
         plot([thetaMin thetaMin],[0,300],'-r'); hold on;   
         plot([thetaMax thetaMax],[0,300],'-r'); hold on;
@@ -29,7 +34,7 @@ end
 %   - theta est en degrés
 
 
-function [distance] = HeunIntegrate(theta,y0,v0,h)%(theta,y0,v0,h,f)
+function [distance] = HeunIntegrate(theta,y0,v0,h,f)
 
     global shot
     U = zeros(4);
@@ -47,7 +52,8 @@ function [distance] = HeunIntegrate(theta,y0,v0,h)%(theta,y0,v0,h,f)
     end
     % Je bloque un peu sur ça (cfr énoncé) :
     % "La longueur du dernier pas sera adaptee afin
-    % d?obtenir une valeur nulle pour la derniere hauteur."
+    % d'obtenir une valeur nulle pour la derniere hauteur."
+    % Faut faire avec la méthode de la bissection !
 
     distance  = U(2);
     subplot(2,1,2);

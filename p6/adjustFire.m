@@ -65,13 +65,13 @@ end
 %   - theta est en degres
 
 
-La fonction HeunIntegrate int`egre les  ?equations diff ?erentielles ordinaires
-avec la m ?ethode de Heun. Les conditions initiales sont sp ?ecifi ?ees par les
-arguments y0, v0 et theta. Le pas est donn ?e par h. Cette fonction est  
-evidemment n ?ecessaire pour la pr ?ec ?edente. L?int ?egration temporelle se
-fait jusqu?au moment ou` la hauteur de l?obus est nulle. La longueur du
-dernier pas sera adapt ?e afin d?obtenir une valeur nulle pour la derni`ere
-hauteur. La fonction retourne la distance horizontale parcourue.
+% La fonction HeunIntegrate integre les equations differentielles ordinaires
+% avec la methode de Heun. Les conditions initiales sont specifiees par les
+% arguments y0, v0 et theta. Le pas est donne par h. Cette fonction est  
+% evidemment necessaire pour la precedente. L integration temporelle se
+% fait jusqu au moment ou la hauteur de l obus est nulle. La longueur du
+% dernier pas sera adaptee afin d obtenir une valeur nulle pour la derniere
+% hauteur. La fonction retourne la distance horizontale parcourue.
 
 function [distance] = HeunIntegrate(theta,y0,v0,h,f)
 %HEUNINTEGRATE - Integrate the EDO's using the Heun integration

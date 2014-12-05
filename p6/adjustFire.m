@@ -1,4 +1,21 @@
 function [theta] = adjustFire(y0,v0,epsilon,h,f)
+%ADJUSTFIRE - Compute the optimal firing angle with initial 
+%             position (0,y0) and intial velocity v0.
+%
+%   You can get the problem statement <a
+%   href="http://perso.uclouvain.be/vincent.legat/teaching/bac-q3/data/probleme-problem1415-6.pdf">here</a>.
+%
+%   [theta] = ADJUSTFIRE(y0,v0,epsilon,h,f)
+%       y0 is the initial height, v0 the initial velocity, 
+%       epsilon the required precision, h the step and f the pointer 
+%       to the function containing the equations of motion of the bullet.
+
+% Methode Num FSAB 1104
+% Probleme MATLAB 6 : Un peu de mecanique...
+% Etudiants : Une collaboration de :
+%                       - Antoine Legat 4776-1300
+%                       - John de Wasseige 5224-1300
+% Tuteur : Victor Colognesi
 
 
 % Merci pour tes chokotoffs je viens de m'en mettre un :D

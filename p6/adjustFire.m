@@ -81,7 +81,7 @@ else
     % on arrive a la solution en 23 shots plutot que 42 (pour
     % bonus==0).
     distA = HeunIntegrate(thetaMin,y0,v0,h,f);
-    distE = 0;
+    distE = HeunIntegrate(thetaMax,y0,v0,h,f);
     
     while abs(thetaMax - thetaMin) > 2*epsilon
         

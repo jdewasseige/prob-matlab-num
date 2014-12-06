@@ -91,9 +91,9 @@ else
         distC = HeunIntegrate(c,y0,v0,h,f);
         
         %dx/dtheta (b) :
-        dxB = (distA - distC)/abs(c - thetaMin);
+        dxB = (distC - distA)/(c - thetaMin);
         %dx/dtheta (d) :
-        dxD = (distC - distE)/abs(thetaMax - c);
+        dxD = (distE - distC)/(thetaMax - c);
         
         if dxB*dxD < 0 % racine dans [b,d]
             distA = HeunIntegrate(b,y0,v0,h,f);
@@ -101,7 +101,7 @@ else
             thetaMin = b;
             thetaMax = d;
             distMax = distC;
-        elseif dxB >= 0 % racine dans [a,b]
+        elseif dxB <= 0 % racine dans [a,b]
             distE = HeunIntegrate(b,y0,v0,h,f);
             thetaMax = b;
             distMax = distE;

@@ -23,10 +23,10 @@ assert(length(x)==length(y),'Les matrices x et y n''ont pas les memes dimensions
 n = abs(n);
 
 z = x+i*y;
-alpha = z; 
+alpha = z; % pre-allocation
 
 if n==1 
-    c = [1 1 1 0]; % Le coefficients 0 est necessaire pour assurer que 
+    c = [1 1 1 0]; % Le coefficient 0 est necessaire pour assurer que 
                    % alpha puisse prendre la valeur 0.
 elseif n==2 
     c = [2 3 4 -1];
@@ -48,6 +48,5 @@ for k=1:size(z,1)
         alpha(k,l) = max(abs(r));
     end
 end
-
 
 end

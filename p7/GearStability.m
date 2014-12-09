@@ -20,7 +20,7 @@ function [alpha] = GearStability(x,y,n)
 % Tuteur : Victor Colognesi
 
 assert(length(x)==length(y),'Les matrices x et y n''ont pas les memes dimensions !');
-n = abs(n);
+assert(0<n && n<7, 'n doit etre compris entre 1 et 6');
 
 z = x+i*y;
 alpha = z; % pre-allocation

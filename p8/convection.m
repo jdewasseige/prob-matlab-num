@@ -39,7 +39,7 @@ if n < 5
 end
 % zeta
 if zeta < 0
-   fprintf('\nYou chose zeta=%d, it is negative and that makes no\n',zeta);
+    fprintf('\nYou chose zeta=%d, it is negative and that makes no\n',zeta);
     fprintf('physical sense because zeta = density * heat capacity\n') ;
     fprintf('and none of both can be negative.\n') ;
 end
@@ -92,31 +92,16 @@ U(2:n-1,2:n-1) = reshape(A(map,map)\B,n-2,n-2);
 end
 
 
-
-% A retirer avant de soumettre sur le web
-function [u,v] = velocity(x,y)
-epsilon = 1/5;
-zp = (-1+ sqrt(1+4*(pi*epsilon)^2))/(2*epsilon);
-zm = (-1- sqrt(1+4*(pi*epsilon)^2))/(2*epsilon);
-D = ((exp(zm)-1)*zp + (1-exp(zp))*zm)/(exp(zp)-exp(zm));
-fu = (pi/D) * (1+ ((exp(zm)-1)*exp(zp*(x+1)/2) + (1-exp(zp))*exp(zm*(x+1)/2))/(exp(zp)-exp(zm)));
-fv = (1/D) * (((exp(zm)-1)*zp*exp(zp*(x+1)/2) + (1-exp(zp))*zm*exp(zm*(x+1)/2))/(exp(zp)-exp(zm)));
-u = fu.*sin(pi*y/2);
-v = fv.*cos(pi*y/2);
-end
-
-
-
 function f = source(x,y)
 %SOURCE - Gives the value of the source term at the point (x,y).
-    assert(abs(x) <= 1 && abs(y) <= 1, ...
-        'The point argument of f in not in domain Omega');
-    if x >= 0.5
-        f = 10 ;
-    else
-        f = 0 ;
-    end
+
+assert(abs(x) <= 1 && abs(y) <= 1, ...
+    'The point argument of f in not in domain Omega');
+
+if x >= 0.5
+    f = 10 ;
+else
+    f = 0 ;
 end
 
-
-
+end

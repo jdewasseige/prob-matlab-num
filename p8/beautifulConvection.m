@@ -29,8 +29,3 @@ U(2:n-1,2:n-1) = reshape(A(map,map)\B,n-2,n-2);
 contourf(X,Y,U); 
 axis off; axis equal
 end
-
-
-
-
-

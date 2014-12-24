@@ -3,7 +3,8 @@ function test_matlab8
 %
 % -1- Les jolis plots :-)
 %
-close all;  set(figure,'Color',[1 1 1]);
+%close all;
+set(figure,'Color',[1 1 1]);
 
 zeta = [0 10 100 1000];
 for i=1:4
